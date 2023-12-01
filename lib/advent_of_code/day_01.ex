@@ -15,9 +15,7 @@ defmodule AdventOfCode.Day01 do
         |> Enum.filter(fn i -> i > 0 end)
 
       if length(numbers) > 0 do
-        res = 10 * List.first(numbers) + List.last(numbers)
-        IO.puts("#{Kernel.inspect(numbers, charlists: :as_lists)}: #{res}")
-        res
+        10 * List.first(numbers) + List.last(numbers)
       else
         0
       end
