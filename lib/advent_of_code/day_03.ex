@@ -70,13 +70,13 @@ defmodule AdventOfCode.Day03 do
 
     [
       index - length,
-      (if right_edge, do: index, else: index - length + 1),
-      (if right_edge, do: index, else: index + 1),
-      (if right_edge, do: index, else: index + length + 1),
+      (if right_edge, do: -1, else: index - length + 1),
+      (if right_edge, do: -1, else: index + 1),
+      (if right_edge, do: -1, else: index + length + 1),
       index + length,
-      (if left_edge, do: index, else: index + length - 1),
-      (if left_edge, do: index, else: index - 1),
-      (if left_edge, do: index, else: index - length - 1)
+      (if left_edge, do: -1, else: index + length - 1),
+      (if left_edge, do: -1, else: index - 1),
+      (if left_edge, do: -1, else: index - length - 1)
     ]
     |> Enum.filter(fn i -> i > 0 end)
     |> Enum.filter(fn i ->
