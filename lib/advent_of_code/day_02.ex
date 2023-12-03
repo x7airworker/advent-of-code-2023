@@ -17,9 +17,9 @@ defmodule AdventOfCode.Day02 do
         impossible_count = String.split(games, ";")
           |> Enum.map(&parse_game/1)
           |> Enum.filter(fn x ->
-            Map.get(x, "red", 0) > @max_red or
-            Map.get(x, "green", 0) > @max_green or
-            Map.get(x, "blue", 0) > @max_blue
+            x["red"] > @max_red or
+            x["green"] > @max_green or
+            x["blue"] > @max_blue
           end)
           |> Enum.count()
 
@@ -39,9 +39,9 @@ defmodule AdventOfCode.Day02 do
           |> String.split(";")
           |> Enum.map(&parse_game/1)
 
-        Map.get(Enum.max_by(games, & Map.get(&1, "red", 0)), "red", 0) *
-        Map.get(Enum.max_by(games, & Map.get(&1, "green", 0)), "green", 0) *
-        Map.get(Enum.max_by(games, & Map.get(&1, "blue", 0)), "blue", 0)
+        Enum.max_by(games, & &1["red"])["red"] *
+        Enum.max_by(games, & &1["green"])["green"] *
+        Enum.max_by(games, & &1["blue"])["blue"]
       end)
      |> Enum.sum()
   end
@@ -50,7 +50,11 @@ defmodule AdventOfCode.Day02 do
     game_str
       |> String.split(",")
       |> Enum.map(&String.trim/1)
-      |> Enum.reduce(%{}, fn x, acc ->
+      |> Enum.reduce(%{
+        "red" => 0,
+        "green" => 0,
+        "blue" => 0
+      }, fn x, acc ->
         [value, key] = String.split(x, " ")
         Map.put(acc, key, value
           |> String.trim
